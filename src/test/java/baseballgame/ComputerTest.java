@@ -1,16 +1,13 @@
 package baseballgame;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class ComputerTest {
     Computer computer = new Computer();
 
-    @DisplayName("answerGenerate 테스트")
     @Test
     void answerGenerateTest() {
         int answer = computer.answerGenerate();
@@ -25,6 +22,14 @@ class ComputerTest {
         assertThat(units).isNotEqualTo(tens);
         assertThat(units).isNotEqualTo(hundreds);
         assertThat(tens).isNotEqualTo(hundreds);
+    }
+
+    @Test
+    void comparePitchingToAnswerTest() {
+        assertThat(computer.comparePitchingToAnswer(123,123)).isEqualTo("3개의 숫자를 모두 맞히셨습니다!");
+        assertThat(computer.comparePitchingToAnswer(104,123)).isEqualTo("1스트라이크");
+        assertThat(computer.comparePitchingToAnswer(124,142)).isEqualTo("2볼 1스트라이크");
+
     }
 
 }
