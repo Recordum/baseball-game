@@ -24,3 +24,10 @@ git checkout main // 기본 브랜치가 main인 경우
 git checkout -b 브랜치이름
 ex) git checkout -b apply-feedback
 ```
+
+---
+4. 숫자야구게임 구현
+
+   * 답을 랜덤으로 생성하는 기능
+   * Inputview와 답을 비교해서 ball/strike/nothing을 판단하는 기능
+   * UI 기능
