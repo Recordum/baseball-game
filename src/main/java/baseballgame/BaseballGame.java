@@ -2,7 +2,7 @@ package baseballgame;
 
 public class BaseballGame {
 
-    private final int answer;
+    private int answer;
 
 
     public BaseballGame() {
