@@ -28,6 +28,13 @@ ex) git checkout -b apply-feedback
 ---
 4. 숫자야구게임 구현
 
-   * 답을 랜덤으로 생성하는 기능
-   * Inputview와 답을 비교해서 ball/strike/nothing을 판단하는 기능
-   * UI 기능
+   * Computer
+      1. answer 값을 생성한다.(100 <= answer < 1000)
+      2. InputView 값과 answer 값을 비교한다.
+   * Player
+     1. 답을 맞춘다.
+   * InputView
+      1. 답을 맞출 때까지 Player에게 input 을 요청한다.
+   * ResultView
+      1. 답을 맞출 때까지 player에게 결과를 제공한다.
+     2. 답을 맞추면 player에게 게임을 진행할지 종료할지 물어본다.
