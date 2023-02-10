@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class InputView {
     Scanner scanner = new Scanner(System.in);
 
-    public int numberPitcher() {
-        System.out.println("세자리 숫자만 입력하세요");
+    public int view() {
+        System.out.print("숫자를 입력해 주세요");
         int number = scanner.nextInt();
         while (!validatePitchingNumber(number)){
             System.out.println("세자리 숫자만 입력하세요");
