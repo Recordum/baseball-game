@@ -7,7 +7,7 @@ public class Computer {
         int tens = (int)(Math.random() * 10) + 0;
         int hundreds = (int)(Math.random() * 9) + 1;
 
-        while (isDifferPlaceValue(units, tens, hundreds)){
+        while (!isDifferPlaceValue(units, tens, hundreds)){
             units = (int)(Math.random() * 10) + 0;
             tens = (int)(Math.random() * 10) + 0;
             hundreds = (int)(Math.random() * 9) + 1;
@@ -17,9 +17,9 @@ public class Computer {
 
     public boolean isDifferPlaceValue(int units, int tens, int hundreds) {
         if(units != tens && units != hundreds && hundreds != tens){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     public String comparePitchingToAnswer(int pitching, int answer) {
 

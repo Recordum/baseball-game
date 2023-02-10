@@ -25,6 +25,15 @@ class ComputerTest {
     }
 
     @Test
+    void isDifferPlaceValueTest() {
+        assertThat(computer.isDifferPlaceValue(1,2,3)).isTrue();
+        assertThat(computer.isDifferPlaceValue(1,1,1)).isFalse();
+        assertThat(computer.isDifferPlaceValue(1,1,2)).isFalse();
+        assertThat(computer.isDifferPlaceValue(1,2,1)).isFalse();
+        assertThat(computer.isDifferPlaceValue(2,1,1)).isFalse();
+    }
+
+    @Test
     void comparePitchingToAnswerTest() {
         assertThat(computer.comparePitchingToAnswer(123,123)).isEqualTo("3개의 숫자를 모두 맞히셨습니다!");
         assertThat(computer.comparePitchingToAnswer(104,123)).isEqualTo("1스트라이크");
