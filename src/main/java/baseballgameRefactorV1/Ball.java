@@ -1,15 +1,20 @@
 package baseballgameRefactorV1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 public class Ball {
 
     private List<PlaceValue> ball;
 
-    private static final int HUNDREDS = 0;
-    private static final int TENS = 1;
-    private static final int UNITS = 2;
+    private static final String  BALL_NO = "ballNo";
+    private static final String  STRIKE_NO = "StrikeNo";
+
+    private int ballNo = 0;
+    private int strikeNo = 0;
 
     public Ball(Integer number) {
         ArrayList<PlaceValue> ball = setBall(number);
@@ -27,41 +32,44 @@ public class Ball {
         }
         return ball;
     }
+    public Map<String, Integer> countBallStatus(Ball userBall){
+       
+        Map<String, Integer> ballCountMap = new HashMap<>();
+        for (PlaceValue answerValue : this.ball) {
+            divideToPlaceValue(userBall, answerValue);
+        }
 
-    public int ballCount(Ball answer) {
-       int count = 0;
-       if(ball.get(HUNDREDS).isEqualValue(answer.ball.get(TENS))){
-           count++;
-       }
-       if(ball.get(HUNDREDS).isEqualValue(answer.ball.get(UNITS))){
-           count++;
-       }
-       if(ball.get(TENS).isEqualValue(answer.ball.get(HUNDREDS))){
-           count++;
-       }
-       if(ball.get(TENS).isEqualValue(answer.ball.get(UNITS))){
-           count++;
-       }
-       if(ball.get(UNITS).isEqualValue(answer.ball.get(TENS))){
-           count++;
-       }
-       if(ball.get(UNITS).isEqualValue(answer.ball.get(HUNDREDS))){
-           count++;
-       }
-       return count;
+        ballCountMap.put(BALL_NO,ballNo);
+        ballCountMap.put(STRIKE_NO,strikeNo);
+
+        return ballCountMap;
     }
-    public int strikeCount(Ball answer) {
-        int count = 0;
-        if(ball.get(HUNDREDS).isEqualValue(answer.ball.get(HUNDREDS))){
-            count++;
+
+    private void divideToPlaceValue(Ball userBall, PlaceValue answerValue) {
+        userBall.ball.forEach(userValue -> comparePlaceValue(answerValue, userValue));
+    }
+
+
+    private void comparePlaceValue(PlaceValue answerValue, PlaceValue userValue) {
+
+        if(compare(answerValue, userValue).isBall()){
+            ballNo++;
         }
-        if(ball.get(TENS).isEqualValue(answer.ball.get(TENS))){
-            count++;
+        if(compare(answerValue, userValue).isStrike()){
+            strikeNo++;
         }
-        if(ball.get(UNITS).isEqualValue(answer.ball.get(UNITS))){
-            count++;
-        }
-        return count;
+    }
+
+
+    private static BallStatus compare(PlaceValue answerValue, PlaceValue userValue) {
+
+       if(answerValue.isEqualValue(userValue)&& answerValue.isEqualPlace(userValue)){
+           return BallStatus.STRIKE;
+       }
+       if(answerValue.isEqualValue(userValue)){
+           return BallStatus.BALL;
+       }
+       return BallStatus.NOTHING;
     }
 }
 

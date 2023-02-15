@@ -1,15 +1,27 @@
 package baseballgameRefactorV1;
 
-import java.util.ArrayList;
+
+import java.util.Map;
 
 public class Referee {
-    int strikeCount = 0;
-    int ballCount = 0;
+    private int strikeNo = 0;
+    private int ballNo = 0;
 
-    public Result compare(Ball answer, Ball userball) {
-        strikeCount = userball.strikeCount(answer);
-        ballCount = userball.ballCount(answer);
+    private static final String  BALL_NO = "ballNo";
+    private static final String  STRIKE_NO = "StrikeNo";
 
-        return new Result(strikeCount, ballCount);
+    public Result judge(Ball answer, Ball userBall){
+
+        Map<String, Integer> ballCountMap = mapBallStatusCount(answer, userBall);
+
+        strikeNo = ballCountMap.get(STRIKE_NO);
+        ballNo = ballCountMap.get(BALL_NO);
+
+        return new Result(strikeNo, ballNo);
     }
+
+    private static Map<String, Integer> mapBallStatusCount(Ball answer, Ball userBall) {
+        return userBall.countBallStatus(answer);
+    }
+
 }

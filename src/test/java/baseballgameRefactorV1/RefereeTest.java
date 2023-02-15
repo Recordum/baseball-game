@@ -1,36 +1,40 @@
 package baseballgameRefactorV1;
 
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class RefereeTest {
 
     @Test
-    void nothing(){
-        Ball ball = new Ball(456);
-        Ball answer = new Ball(123);
-        Referee referee = new Referee();
-        assertThat(referee.compare(answer, ball).result()).isEqualTo("낫싱");
+    @DisplayName("judge() 결과는 nothing")
+    void judge_nothing(){
+       Referee referee = new Referee();
+       Ball answer = new Ball(123);
+       Ball userBall = new Ball(456);
+
+       assertThat(referee.judge(answer,userBall)).usingRecursiveComparison().isEqualTo(new Result(0,0));
     }
 
     @Test
-    void ball(){
-        Ball ball = new Ball(456);
-        Ball answer = new Ball(165);
+    @DisplayName("judge() 결과는 1 ball")
+    void judge_1ball(){
         Referee referee = new Referee();
-        assertThat(referee.compare(answer, ball).result()).isEqualTo("2볼 입니다.");
+        Ball answer = new Ball(123);
+        Ball userBall = new Ball(436);
+
+        assertThat(referee.judge(answer,userBall)).usingRecursiveComparison().isEqualTo(new Result(0,1));
     }
     @Test
-    void Strike(){
-        Ball ball = new Ball(156);
-        Ball answer = new Ball(165);
+    @DisplayName("judge() 결과는 1 ball 1 strike")
+    void judge_1ball1strike(){
         Referee referee = new Referee();
-        assertThat(referee.compare(answer, ball).result()).isEqualTo("2볼 1스트라이크 입니다.");
+        Ball answer = new Ball(423);
+        Ball userBall = new Ball(436);
+
+        assertThat(referee.judge(answer,userBall)).usingRecursiveComparison().isEqualTo(new Result(1,1));
+
     }
 }
