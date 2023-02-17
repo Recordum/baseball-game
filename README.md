@@ -82,6 +82,7 @@
 2. Balls에서 입력값 validation 전부 포함하기.(PlaceValue remove)
 3. 클래스별 기능 다시 설계하기(설계는 코드를 짜면서 설계변경시 README 수정하기 )
 4. 클래스 응집도와 결합도 생각하면서 다시 설계하기
+5. mvc패턴으로 디렉토리구성
 
 * InputView
     * 사용자에게 input을 묻는 view를 제공
