@@ -10,66 +10,56 @@ public class Ball {
 
     private List<PlaceValue> ball;
 
-    private static final String  BALL_NO = "ballNo";
-    private static final String  STRIKE_NO = "StrikeNo";
-
-    private int ballNo = 0;
-    private int strikeNo = 0;
+    private static final String BALL_NO = "ballNo";
+    private static final String STRIKE_NO = "strikeNo";
 
     public Ball(Integer number) {
-        ArrayList<PlaceValue> ball = setBall(number);
-        this.ball = ball;
+        this.ball = setBall(number);
     }
 
-
-    private static ArrayList<PlaceValue> setBall(Integer number) {
-
+    private List<PlaceValue> setBall(Integer number) {
         String[] userBallUnit = String.valueOf(number).split("");
-        ArrayList<PlaceValue> ball = new ArrayList<>();
-
+        List<PlaceValue> ball = new ArrayList<>();
         for (int i = 0; i < userBallUnit.length; i++) {
-            ball.add(new PlaceValue(Integer.parseInt(userBallUnit[i]),i+1));
+            ball.add(new PlaceValue(Integer.parseInt(userBallUnit[i]), i + 1));
         }
         return ball;
     }
-    public Map<String, Integer> countBallStatus(Ball userBall){
-       
-        Map<String, Integer> ballCountMap = new HashMap<>();
-        for (PlaceValue answerValue : this.ball) {
-            divideToPlaceValue(userBall, answerValue);
-        }
 
-        ballCountMap.put(BALL_NO,ballNo);
-        ballCountMap.put(STRIKE_NO,strikeNo);
+    public Map<String, Integer> countBallStatus(Ball userBall) {
+        int ballNo = countBalls(userBall);
+        int strikeNo = countStrikes(userBall);
+
+        Map<String, Integer> ballCountMap = new HashMap<>();
+        ballCountMap.put(BALL_NO, ballNo);
+        ballCountMap.put(STRIKE_NO, strikeNo);
 
         return ballCountMap;
     }
 
-    private void divideToPlaceValue(Ball userBall, PlaceValue answerValue) {
-        userBall.ball.forEach(userValue -> comparePlaceValue(answerValue, userValue));
+    private int countBalls(Ball userBall) {
+        return (int) ball.stream()
+                .filter(answerValue -> userBall.ball.stream()
+                        .anyMatch(userValue -> isBall(answerValue, userValue)))
+                .count();
     }
 
-
-    private void comparePlaceValue(PlaceValue answerValue, PlaceValue userValue) {
-
-        if(compare(answerValue, userValue).isBall()){
-            ballNo++;
-        }
-        if(compare(answerValue, userValue).isStrike()){
-            strikeNo++;
-        }
+    private int countStrikes(Ball userBall) {
+        return (int) ball.stream()
+                .filter(answerValue -> userBall.ball.stream()
+                        .anyMatch(userValue -> isStrike(answerValue, userValue)))
+                .count();
     }
 
+    private boolean isBall(PlaceValue answerValue, PlaceValue userValue) {
+        return !answerValue.isEqualPlace(userValue) && answerValue.isEqualValue(userValue);
+    }
 
-    private static BallStatus compare(PlaceValue answerValue, PlaceValue userValue) {
+    private boolean isStrike(PlaceValue answerValue, PlaceValue userValue) {
+        return answerValue.isEqualPlace(userValue) && answerValue.isEqualValue(userValue);
+    }
 
-       if(answerValue.isEqualValue(userValue)&& answerValue.isEqualPlace(userValue)){
-           return BallStatus.STRIKE;
-       }
-       if(answerValue.isEqualValue(userValue)){
-           return BallStatus.BALL;
-       }
-       return BallStatus.NOTHING;
+    private List<PlaceValue> ball() {
+        return ball;
     }
 }
-
