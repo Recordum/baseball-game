@@ -7,7 +7,7 @@
 * 이 같은 과정을 반복해 컴퓨터가 선택한 3개의 숫자를 모두 맞히면 게임이 종료된다.
 * 게임을 종료한 후 게임을 다시 시작하거나 완전히 종료할 수 있다.
 
-## 2. 기능요구사항
+## 2. 예시
 ```
 숫자를 입력해 주세요 : 123
 1볼 1스트라이크
@@ -75,3 +75,33 @@
 * ResultView
     * 사용자에게 result를 반환한다.
     * 게임종료/재시작 view를 제공한다.
+
+## 6. 숫자야구게임 Refactor V2
+1. 변수 네이밍 다시 해보기(어떤 기능을 하는지 좀 더 세분화해서 명확 하게)
+2. 원시값을 객체로 포장할떄 interface를 사용해 클래스간 결합도 낮추기
+2. Balls에서 입력값 validation 전부 포함하기.(PlaceValue remove)
+3. 클래스별 기능 다시 설계하기(설계는 코드를 짜면서 설계변경시 README 수정하기 )
+4. 클래스 응집도와 결합도 생각하면서 다시 설계하기
+
+* InputView
+    * 사용자에게 input을 묻는 view를 제공
+
+* Balls
+    * inputView에서 input을 넘겨받음
+    * input값에 대한 validation을 진행한다.
+    * List를 반환한다.
+    * Balls 객체의 비교 메소드를 구현한다.
+
+* Referee
+    * 사용자 Balls와 Answer Balls를 비교하여 Result를 리턴한다.
+
+* Result
+    * 결과값을 담는 객체를 생성
+  
+* ResultView
+    * Result에 따라 사용자에게 view를 제공
+  
+* BasebalGameRefactorV2
+    * GameStatus 따라 게임 진행을 결정한다.
+
+  
