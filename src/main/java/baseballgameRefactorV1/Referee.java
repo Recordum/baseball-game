@@ -8,7 +8,7 @@ public class Referee {
     private int ballNo = 0;
 
     private static final String  BALL_NO = "ballNo";
-    private static final String  STRIKE_NO = "StrikeNo";
+    private static final String  STRIKE_NO = "strikeNo";
 
     public Result judge(Ball answer, Ball userBall){
 
