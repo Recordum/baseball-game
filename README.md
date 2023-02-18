@@ -78,11 +78,12 @@
 
 ## 6. 숫자야구게임 Refactor V2
 1. 변수 네이밍 다시 해보기(어떤 기능을 하는지 좀 더 세분화해서 명확 하게)
-2. 원시값을 객체로 포장할떄 interface를 사용해 클래스간 결합도 낮추기
 2. Balls에서 입력값 validation 전부 포함하기.(PlaceValue remove)
 3. 클래스별 기능 다시 설계하기(설계는 코드를 짜면서 설계변경시 README 수정하기 )
 4. 클래스 응집도와 결합도 생각하면서 다시 설계하기
 5. mvc패턴으로 디렉토리구성
+6. String 하드코딩하지 않기(view/ExceptionMessage 등등)
+7. 람다사용시 메소드참조가 더 가독성이 높다면 메소드 참조 사용해보기
 
 * InputView
     * 사용자에게 input을 묻는 view를 제공
@@ -102,7 +103,7 @@
 * ResultView
     * Result에 따라 사용자에게 view를 제공
   
-* BasebalGameRefactorV2
+* Controller
     * GameStatus 따라 게임 진행을 결정한다.
 
   
