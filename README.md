@@ -84,6 +84,7 @@
 5. mvc패턴으로 디렉토리구성
 6. String 하드코딩하지 않기(view/ExceptionMessage 등등)
 7. 람다사용시 메소드참조가 더 가독성이 높다면 메소드 참조 사용해보기
+8. 커밋 컨벤션 준수하기.
 
 * InputView
     * 사용자에게 input을 묻는 view를 제공
