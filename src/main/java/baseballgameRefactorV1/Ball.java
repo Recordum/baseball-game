@@ -58,3 +58,4 @@
         private boolean isStrike(PlaceValue answerValue, PlaceValue userValue) {
             return answerValue.isEqualPlace(userValue) && answerValue.isEqualValue(userValue);
         }
+    }
