@@ -1,65 +1,60 @@
-package baseballgameRefactorV1;
+    package baseballgameRefactorV1;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+    import java.util.ArrayList;
+    import java.util.HashMap;
+    import java.util.List;
+    import java.util.Map;
 
 
-public class Ball {
+    public class Ball {
 
-    private List<PlaceValue> ball;
+        private List<PlaceValue> ball;
 
-    private static final String BALL_NO = "ballNo";
-    private static final String STRIKE_NO = "strikeNo";
+        private static final String BALL_NO = "ballNo";
+        private static final String STRIKE_NO = "strikeNo";
 
-    public Ball(Integer number) {
-        this.ball = setBall(number);
-    }
-
-    private List<PlaceValue> setBall(Integer number) {
-        String[] userBallUnit = String.valueOf(number).split("");
-        List<PlaceValue> ball = new ArrayList<>();
-        for (int i = 0; i < userBallUnit.length; i++) {
-            ball.add(new PlaceValue(Integer.parseInt(userBallUnit[i]), i + 1));
+        public Ball(Integer number) {
+            this.ball = setBall(number);
         }
-        return ball;
-    }
 
-    public Map<String, Integer> countBallStatus(Ball userBall) {
-        int ballNo = countBalls(userBall);
-        int strikeNo = countStrikes(userBall);
+        private List<PlaceValue> setBall(Integer number) {
+            String[] userBallUnit = String.valueOf(number).split("");
+            List<PlaceValue> ball = new ArrayList<>();
+            for (int i = 0; i < userBallUnit.length; i++) {
+                ball.add(new PlaceValue(Integer.parseInt(userBallUnit[i]), i + 1));
+            }
+            return ball;
+        }
 
-        Map<String, Integer> ballCountMap = new HashMap<>();
-        ballCountMap.put(BALL_NO, ballNo);
-        ballCountMap.put(STRIKE_NO, strikeNo);
+        public Map<String, Integer> countBallStatus(Ball userBall) {
+            int ballNo = countBalls(userBall);
+            int strikeNo = countStrikes(userBall);
 
-        return ballCountMap;
-    }
+            Map<String, Integer> ballCountMap = new HashMap<>();
+            ballCountMap.put(BALL_NO, ballNo);
+            ballCountMap.put(STRIKE_NO, strikeNo);
 
-    private int countBalls(Ball userBall) {
-        return (int) ball.stream()
-                .filter(answerValue -> userBall.ball.stream()
-                        .anyMatch(userValue -> isBall(answerValue, userValue)))
-                .count();
-    }
+            return ballCountMap;
+        }
 
-    private int countStrikes(Ball userBall) {
-        return (int) ball.stream()
-                .filter(answerValue -> userBall.ball.stream()
-                        .anyMatch(userValue -> isStrike(answerValue, userValue)))
-                .count();
-    }
+        private int countBalls(Ball userBall) {
+            return (int) ball.stream()
+                    .filter(answerValue -> userBall.ball.stream()
+                            .anyMatch(userValue -> isBall(answerValue, userValue)))
+                    .count();
+        }
 
-    private boolean isBall(PlaceValue answerValue, PlaceValue userValue) {
-        return !answerValue.isEqualPlace(userValue) && answerValue.isEqualValue(userValue);
-    }
+        private int countStrikes(Ball userBall) {
+            return (int) ball.stream()
+                    .filter(answerValue -> userBall.ball.stream()
+                            .anyMatch(userValue -> isStrike(answerValue, userValue)))
+                    .count();
+        }
 
-    private boolean isStrike(PlaceValue answerValue, PlaceValue userValue) {
-        return answerValue.isEqualPlace(userValue) && answerValue.isEqualValue(userValue);
-    }
+        private boolean isBall(PlaceValue answerValue, PlaceValue userValue) {
+            return !answerValue.isEqualPlace(userValue) && answerValue.isEqualValue(userValue);
+        }
 
-    private List<PlaceValue> ball() {
-        return ball;
-    }
-}
+        private boolean isStrike(PlaceValue answerValue, PlaceValue userValue) {
+            return answerValue.isEqualPlace(userValue) && answerValue.isEqualValue(userValue);
+        }
