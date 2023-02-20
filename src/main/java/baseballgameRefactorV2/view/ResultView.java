@@ -17,7 +17,7 @@ public class ResultView {
         System.out.println(view);
         if(view.equals(ConsoleMessage.CORRECT.printMessage())){
 
-            System.out.println(ConsoleMessage.RESULT_MESSAGE);
+            System.out.println(ConsoleMessage.RESULT_MESSAGE.printMessage());
             gameStatus = scanner.nextInt();
 
             return restartOrFinish(gameStatus);
