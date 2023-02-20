@@ -6,12 +6,12 @@ import java.util.List;
 
 public class Balls {
 
-    private List<Integer> balls;
-    private final int MIN_VALUE = 1;
-    private final int DIGIT_LENGTH = 3;
+    private List<Integer> ballValues;
+    private static final int MIN_VALUE = 1;
+    private static final int DIGIT_LENGTH = 3;
     
     public Balls(int number) {
-        this.balls = setBalls(number);
+        this.ballValues = setBalls(number);
     }
 
     private List<Integer> setBalls(int number) {
@@ -52,5 +52,11 @@ public class Balls {
                 .forEach(digit -> {throw new IllegalStateException("1에서 9까지 숫자만 입력 가능 합니다.");});
     }
 
+    public boolean isStrike(Balls answerBalls, int digit) {
+       return this.ballValues.get(digit) == answerBalls.ballValues.get(digit);
+    }
 
+    public boolean isBall(Balls answerBalls, int digit) {
+        return answerBalls.ballValues.contains(this.ballValues.get(digit)) && !this.isStrike(answerBalls,digit);
+    }
 }

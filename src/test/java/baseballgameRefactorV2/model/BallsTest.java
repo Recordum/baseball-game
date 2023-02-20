@@ -1,4 +1,4 @@
-package baseballgameRefactorV2;
+package baseballgameRefactorV2.model;
 
 import baseballgameRefactorV2.model.Balls;
 import org.junit.jupiter.api.DisplayName;
