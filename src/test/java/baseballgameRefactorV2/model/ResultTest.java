@@ -37,4 +37,11 @@ public class ResultTest {
         assertThat(result.view()).isEqualTo(String.format(ConsoleMessage.STRIKE_BALL.printMessage(),1,1));
     }
 
+    @Test
+    @DisplayName("정답일떄 결과")
+    void view_3strikes() {
+        Result result = new Result(3,0);
+        assertThat(result.view()).isEqualTo(String.format(ConsoleMessage.CORRECT.printMessage()));
+    }
+
 }
