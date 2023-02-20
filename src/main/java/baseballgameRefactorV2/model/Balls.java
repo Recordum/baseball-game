@@ -1,5 +1,7 @@
 package baseballgameRefactorV2.model;
 
+import baseballgameRefactorV2.util.ExceptionMessage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +34,7 @@ public class Balls {
     }
     private void checkDigitsLength(String[] digits) {
         if(digits.length!= DIGIT_LENGTH){
-            throw new IllegalStateException("세자리 숫자만 입력 가능 합니다.");
+            throw new IllegalStateException(ExceptionMessage.INVALID_DIGITS_LENGTH.printMessage());
         }
     }
 
@@ -42,14 +44,14 @@ public class Balls {
                 .count() != DIGIT_LENGTH;
 
         if(isDuplicate){
-            throw new IllegalStateException("서로 다른 숫자만 입력 가능 합니다.");
+            throw new IllegalStateException(ExceptionMessage.INVALID_DIGITS_DISTINCT.printMessage());
         }
     }
 
     private void checkDigitsValue(String[] digits) {
         Arrays.stream(digits)
                 .filter(digit -> Integer.parseInt(digit) < MIN_VALUE)
-                .forEach(digit -> {throw new IllegalStateException("1에서 9까지 숫자만 입력 가능 합니다.");});
+                .forEach(digit -> {throw new IllegalStateException(ExceptionMessage.INVALID_DIGITS_RANGE.printMessage());});
     }
 
     public boolean isStrike(Balls answerBalls, int digit) {
