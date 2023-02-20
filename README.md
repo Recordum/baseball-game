@@ -106,5 +106,6 @@
   
 * Controller
     * GameStatus 따라 게임 진행을 결정한다.
+    * Random한 answerBalls를 생선한다.
 
   
